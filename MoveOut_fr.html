@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+
+<style> 
+body {font-family:Lato; font-size: 22px} 
+</style>
+
+<style> 
+input { 
+	font-size: 22px; 
+    font-family:Lato;
+    padding: 4px 4px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #CFA29D;
+    color: white;
+    border-radius: 5px;
+    text-align:right;
+} 
+</style>
+
+<style> 
+button {
+	font-size: 22px; 
+    font-family:Lato;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #CFA29D;
+    font-weight: bold;
+} 
+</style>
+
+<style>
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #B46E66;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    height: 780px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 50%;
+}
+
+.right {
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;}
+    
+    div.expense{
+    text-align: center}
+    
+    label.expense {
+  display: inline-block;
+	width:200px;	
+  text-align: right;}
+   label.budget {
+  display: inline-block;
+	width:150px;	
+  text-align: left;
+}
+   label.savings {
+  display: inline-block;
+	width:226px;	
+  text-align: left;
+}
+
+text {
+display: inline-block;
+text-align: right;}
+
+  table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+    
+</style>
+</head>
+<body>
+
+<h4 style="text-align:center">
+    Vous déménagez de chez vos parents pour la première fois? Utilisez cet outil simple pour budgétiser et voir combien de temps vous devez épargner pour être enfin autonome. Ce budget vous permet d’économiser un peu plus pour vous éviter de retourner chez maman et papa si les temps deviennent durs.
+</h4>
+
+<h3 align="center" id=savings></h3>
+
+<div class="row">
+  <div class="column left" style="background-color:#D5D8DC;">
+  
+<div style="text-align:center"> 
+            <h1>Budget</h1>
+            Salaire mensuel net <br> 
+             <input type="number" 
+                id="netIncome" 
+                value=0  
+                min=0.00
+                max=99999.99
+                step=0.01
+                onchange="updates()">$<br><br>
+            Dépenses <br> <br> 
+        </div>
+
+<div class="expense">
+    <label class="expense">Prêts étudiants:</label>
+    &nbsp&nbsp<input  id="amount_loans" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Carte de crédit:</label>
+        &nbsp&nbsp<input  id="amount_cc" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Nourriture:</label>
+    &nbsp&nbsp<input  id="amount_food" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Téléphone portable:</label>
+    &nbsp&nbsp<input  id="amount_phone" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Transport:</label>
+    &nbsp&nbsp<input  id="amount_transpo" 
+            type="number" 
+            value=0 
+            min=0.00
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Vêtements:</label>
+    &nbsp&nbsp<input  id="amount_clothes" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Divertissement:</label>
+    &nbsp&nbsp<input  id="amount_entertain" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Services d'abonnement:</label>
+    &nbsp&nbsp<input  id="amount_subscriptions" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Soins personels:</label>
+    &nbsp&nbsp<input  id="amount_personal" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Soins de santé:</label>
+    &nbsp&nbsp<input  id="amount_health" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+<div class="expense">
+    <label class="expense">Autre:</label>
+    &nbsp&nbsp<input  id="amount_other" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />$
+</div>
+         
+  </div>
+  <div class="column right" style="background-color:#E5E7E9;">
+  
+  <div style="text-align:center">
+            <h1>Plan</h1>
+            Budget de location <br>  
+            <input 
+                type="number" 
+                id="rent"  
+                value=0 
+                min=0.00 
+                max=99999.99
+                step=0.01
+                onchange="updates()">$<br><br></div>
+                <div style="text-align:center">
+ 
+      <table class="center" >
+ 
+
+  <tr>
+    <td width=230px style="text-align:left">Dépenses mensuelles:</td>
+    <td width=1px  id="expenses" style="text-align:right">0</td>
+    <td width=1px >$</td> 
+  </tr>
+  <tr>
+    <td style="text-align:left">Épargne mensuelle:</td>
+    <td id="balance" style="text-align:right">0</td>
+    <td>$</td>
+  </tr>
+  </table></div>
+         
+          
+          <div align=center id="chart"></div>
+
+            <script src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+        
+                var changeChart;
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    // Draw chart and set values
+                    var data = google.visualization.arrayToDataTable([
+                        ["Budget", "Expenses",{ role: "annotation" }, { role: "style" } , "Savings", { role: "annotation" }, { role: "style" }],
+                        ["Budget", 0,"", "EC7063", 0,"", "#58D68D"]
+                    ]);
+            
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1, 
+                    					2,
+                                     3, 4, 5, 6]);
+            
+                    var options = {
+                        width: "100%",
+                        height: 120,
+                        vAxis: { textPosition: 'none' },
+                        hAxis: { textPosition: 'none' },
+                        bar: {groupWidth: "100%"},
+                        legend: { position: "none" },
+                        isStacked: "percent",
+                        backgroundColor:"#E5E7E9",
+                        is3D:true,
+                        annotations: {
+                            textStyle: {
+                                fontName: 'Lato:400',
+                                fontSize: 18,
+                                bold: true,
+                                color: 'white',
+                            }
+                        }
+                    };
+        
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = 
+                    new google.visualization.BarChart(document.getElementById('chart'));
+                chart.draw(view, options);
+                changeChart = function() {
+                    // define new options
+                  data.setValue(0, 1, monthlyExpenses);
+                  
+                  var expenses = monthlyExpenses + "$";
+                                    data.setValue(0, 2, expenses);
+                       var savings = monthlySavings + "$";             
+                  data.setValue(0, 4, monthlySavings);
+                                    data.setValue(0, 5,savings);
+
+                  
+                    // call draw() with new options 
+                    chart.draw(view, options);
+                }
+            }
+            </script>
+            
+              <!-- Amount to be saved -->
+
+            <div class="slidecontainer">
+                <input 
+                    type="range" 
+                    min="0" 
+                    max="10000" 
+                    value="0" 	
+                    class="slider" 
+                    id="myRange"
+                    disabled=true>
+                
+                
+            </div>
+            <text style="text-align:left ">0$</text>
+            <text style="float:right; clear:both ">10000$</text>
+            
+            <p><label style="display:block;text-align:center">
+Économies nécessaires:</label> 
+            <label style="display:block;text-align:center"><span id="demo"></span></label></p>
+
+            <script>
+                var slider = document.getElementById("myRange");
+                var output = document.getElementById("demo");
+                output.innerHTML = slider.value "$";
+                slider.oninput = function() {
+                    output.innerHTML = this.value;
+                }
+            </script>
+          
+<table class="center">
+ 
+
+  <tr>
+    <td width=300px >Location du premier mois:</td>
+    
+    <td width=1px  id="first_month" style="text-align:right">0</td>
+    <td width=1px >$</td> 
+  </tr>
+  <tr>
+    <td>Location du dernier mois:</td>
+     
+    <td id="last_month" style="text-align:right">0</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Fonds d'urgence d'un mois</td>
+    
+    <td id="emergency" style="text-align:right">0</td>
+    <td>$</td> 
+  </tr>
+  <tr>
+    <td>Déménagement:</td>
+    
+    <td id="moving" style="text-align:right">0</td>
+     <td>$</td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td>Meubles:</td>
+     
+    <td id="furniture"style="text-align:right">0</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Épiceries:</td>
+     
+    <td id="grocery" style="text-align:right">0</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Extra:</td>
+     
+    <td id="extra" style="text-align:right">0</td>
+    <td>$</td>
+  </tr>
+</table>
+          
+          
+   </div>  </div>
+  
+  <br>
+  <div style="text-align:center"><button align="center" onclick=clearAll() > 
+Effacer </button></div>
+  
+<script>
+    
+    var monthlyExpenses;
+    var monthlySavings;
+    var totalSavingsNeeded;
+    var monthlyRent;
+
+    var moving = 200.00;
+    var grocery = 150.00;
+    var furniture = 1000.00;
+    var extra = 150.00; 
+   
+
+    function updates() {
+        updateExpenses();
+
+        updateSavings();
+               
+        updateBudget();
+               
+        updateRent();
+        updateSavingsNeededToMove();
+
+        changeChart();
+         
+    }
+    
+    function clearAll() {
+    	var allInputs = document.getElementsByTagName('INPUT');
+        var expenses = 0;
+        
+        // Sum up expenses
+		for (var i = 0; i < allInputs.length ; i++) {
+        	var input = allInputs[i];
+              input.value=0;
+        } 
+    	updates();
+        document.getElementById("savings").innerHTML="";
+        
+    }
+    function updateRent(){
+        monthlyRent = document.getElementById("rent").value;
+     
+    }
+
+	function updateExpenses (){
+		var allInputs = document.getElementsByTagName('INPUT');
+        var expenses = 0;
+        
+        // Sum up expenses
+		for (var i = 0; i < allInputs.length ; i++) {
+        	var input = allInputs[i];
+              if(input.type == "number" && (input.id != "netIncome" && 
+                    input.id != "rent")) {
+            	var amount;
+            	if (input.value == ""){ //if amount input is empty
+                	amount = 0;
+                    }
+            	else {
+                	amount = parseFloat(input.value);
+                }
+                expenses += amount;
+       		}
+        } 
+        expenses = expenses.toFixed(2);
+        monthlyExpenses = expenses;  
+    }
+    
+    function updateSavings() {
+    	var netIncome = document.getElementById("netIncome").value;
+
+        if (netIncome == "") {
+        	netIncome = 0;
+            }
+        else {
+        	netIncome = parseFloat(netIncome);
+            }
+
+      	var savings = netIncome - monthlyExpenses;
+        var savings = savings.toFixed(2);
+        monthlySavings = savings;
+
+    }
+
+    function updateBudget() {
+        document.getElementById("balance").innerHTML = monthlySavings;
+       	document.getElementById("expenses").innerHTML = monthlyExpenses;
+       
+       	if (monthlySavings < 0) {
+               document.getElementById("balance").setAttribute("style", 
+                    "color:red"); //"in the red"
+       	}
+       	else {
+               document.getElementById("balance").setAttribute("style", 
+                    "color:black");
+       	}
+    }
+    
+        function updateSavingsNeededToMove() {
+                
+                 var expensesAndRent = parseFloat(monthlyExpenses) + parseFloat(monthlyRent);
+                 
+                 
+                 var savingsNeeded = (monthlyRent * 2) + expensesAndRent +
+                      moving + grocery + furniture + extra;
+                      
+    
+                 var timeNeeded = savingsNeeded / monthlySavings;
+    
+                 timeNeeded = Math.ceil(timeNeeded);
+    
+                 var savingsNeededRounded = monthlySavings*timeNeeded;
+    
+                 var adjustedExtra = extra + (savingsNeededRounded - savingsNeeded); 
+                 adjustedExtra = adjustedExtra.toFixed(2);
+                 
+                 savingsNeeded  = savingsNeededRounded.toFixed(2);
+                  
+                 totalSavingsNeeded = savingsNeeded;
+                      
+
+                 updateMessages(expensesAndRent, timeNeeded, adjustedExtra)                 ;
+             
+        }
+        
+    function updateMessages(expensesAndRent, timeNeeded, adjustedExtra) {
+    
+    
+      
+            var savingsOverview = document.getElementById("savings");
+            
+            var savingsBreakdown = document.getElementById("savingsText");
+            var slider = document.getElementById("myRange");
+            var amount = document.getElementById("demo");
+
+            if (monthlyRent > 0) { 
+  
+                if (monthlySavings > 0) {
+                var text1 = document.createTextNode("Vous devrez économiser ");
+                var savingsNeeded = document.createTextNode(String(totalSavingsNeeded)); 
+               
+                var text2 = document.createTextNode("$ au cours de ");
+                var timeNeeded = document.createTextNode(String(timeNeeded));
+                var text3 = document.createTextNode(" mois pour pouvoir déménager");
+           savingsOverview.innerHTML = "";      savingsOverview.appendChild(text1);
+                 savingsOverview.appendChild(savingsNeeded);
+                 savingsOverview.appendChild(text2);
+                 savingsOverview.appendChild(timeNeeded);
+                 savingsOverview.appendChild(text3);
+                 
+                        
+     
+             
+    document.getElementById("first_month").innerHTML = parseFloat(monthlyRent).toFixed(2);
+    document.getElementById("last_month").innerHTML =  parseFloat(monthlyRent).toFixed(2);
+                    document.getElementById("emergency").innerHTML =  parseFloat(expensesAndRent).toFixed(2); 
+                    document.getElementById("moving").innerHTML = parseFloat(moving).toFixed(2);
+                                            
+
+                    document.getElementById("furniture").innerHTML = parseFloat(furniture).toFixed(2);
+                                        document.getElementById("grocery").innerHTML = parseFloat(grocery).toFixed(2);
+                    document.getElementById("extra").innerHTML = adjustedExtra;
+
+                                
+                    updateSlider(slider, amount);
+
+                }
+        
+                else if (monthlySavings == 0){
+                    savingsOverview.innerHTML = 
+                    "Vous n'avez pas d'argent alloué à l'épargne. Vous devez épargner pour déménager!"; 
+                    notValidInputs(slider, amount,savingsBreakdown);
+                    } 
+                
+                else {
+                    savingsOverview.innerHTML = 
+                    "Vos dépenses sont supérieures à vos revenus. Révisez vos dépenses!" ; 
+                    notValidInputs(slider, amount,savingsBreakdown);
+                    
+                    }
+              }
+            else {
+            
+                savingsOverview.innerHTML = 
+                "Veuillez mettre à jour votre budget de location mensuel"; 
+                notValidInputs(slider, amount,savingsBreakdown);
+            }}
+
+    function updateSlider(slider, amount){
+    		slider.disabled="false";
+            slider.value = totalSavingsNeeded;
+            amount.innerHTML = totalSavingsNeeded + "$";
+            amount.setAttribute("style", 
+                    "font-weight:bold");
+            slider.disabled="true";
+        
+
+        }
+    
+    function notValidInputs(slider, amount,savingsBreakdown){
+    		slider.disabled="false";
+            slider.value = 0;
+            amount.innerHTML = "0$"; 
+            slider.disabled="true";
+            document.getElementById("first_month").innerHTML = "0";
+    document.getElementById("last_month").innerHTML =  "0";
+                    document.getElementById("emergency").innerHTML =  "0";
+                    document.getElementById("moving").innerHTML = "0";
+                    document.getElementById("furniture").innerHTML = "0";
+                    document.getElementById("grocery").innerHTML = "0";
+                    document.getElementById("extra").innerHTML = "0";
+    }
+    
+</script>
+
+
+</body>
+</html>
