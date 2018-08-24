@@ -5,12 +5,12 @@
 <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
 
 <style> 
-body {font-family:Lato; font-size: 18px} 
+body {font-family:Lato; font-size: 22px} 
 </style>
 
 <style> 
 input { 
-	font-size: 18px; 
+	font-size: 22px; 
     font-family:Lato;
     padding: 4px 4px;
     margin: 4px 0;
@@ -25,7 +25,7 @@ input {
 
 <style> 
 button {
-	font-size: 18px; 
+	font-size: 22px; 
     font-family:Lato;
     background-color: #FFFFFF;
     border-radius: 5px;
@@ -81,15 +81,15 @@ button {
 .column {
     float: left;
     padding: 10px;
-    height: 700px; /* Should be removed. Only for demonstration */
+    height: 780px; /* Should be removed. Only for demonstration */
 }
 
 .left {
-  width: 45%;
+  width: 50%;
 }
 
 .right {
-  width: 55%;
+  width: 50%;
 }
 
 /* Clear floats after the columns */
@@ -103,7 +103,7 @@ button {
     
     label.expense {
   display: inline-block;
-	width:115px;	
+	width:150px;	
   text-align: right;}
    label.budget {
   display: inline-block;
@@ -115,12 +115,28 @@ button {
 	width:226px;	
   text-align: left;
 }
+
+text {
+display: inline-block;
+text-align: right;}
+
+  table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
     
 </style>
 </head>
 <body>
 
-<h2>Two Unequal Columns</h2>
+<h4 style="text-align:center">
+    Moving out of your parents' place for the first time? Use this simple tool
+    to budget and see how long you need to save to finally be on your own. 
+    This budget makes you save a little more to ensure you won't have to move
+     back in with "mommy" and "daddy" if ever times get tough.
+</h4>
+
+<h3 align="center" id=savings></h3>
 
 <div class="row">
   <div class="column left" style="background-color:#D5D8DC;">
@@ -263,17 +279,23 @@ button {
                 max=99999.99
                 step=0.01
                 onchange="updates()"><br><br></div>
+                <div style="text-align:center">
  
-      <div class="expense">
-          <label class="budget">Monthly Expenses:</label>
-          &nbsp$&nbsp
-          <number id="expenses">0</number></div>
-     <div class="expense">
-          <label class="budget">Monthly Savings:</label>
-          &nbsp$&nbsp
-          <number id="balance">0</number></div>
-          
-          <br>
+      <table class="center" >
+ 
+
+  <tr>
+    <td width=180px style="text-align:left">Monthly Expenses:</td>
+    <td width=1px >$</td> 
+    <td width=1px  id="expenses" style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td style="text-align:left">Monthly Savings:</td>
+    <td>$</td> 
+    <td id="balance" style="text-align:right">0</td>
+  </tr>
+  </table></div>
+         
           
           <div align=center id="chart"></div>
 
@@ -298,7 +320,7 @@ button {
             
                     var options = {
                         width: "100%",
-                        height: 100,
+                        height: 120,
                         vAxis: { textPosition: 'none' },
                         hAxis: { textPosition: 'none' },
                         bar: {groupWidth: "100%"},
@@ -337,64 +359,81 @@ button {
             }
             </script>
             
-            <h3 align="center" id=savings></h3>  <!-- Amount to be saved -->
+              <!-- Amount to be saved -->
 
             <div class="slidecontainer">
                 <input 
                     type="range" 
                     min="0" 
-                    max="15000" 
+                    max="10000" 
                     value="0" 	
                     class="slider" 
                     id="myRange"
                     disabled=true>
-                <p> Savings Needed: $<span id="demo"></span></p>
+                
+                
             </div>
+            <text style="text-align:left ">$0</text>
+            <text style="float:right; clear:both ">$10000</text>
+            
+            <p><label style="display:block;text-align:center">Savings Needed:</label> 
+            <label style="display:block;text-align:center"><span id="demo"></span></label></p>
 
             <script>
                 var slider = document.getElementById("myRange");
                 var output = document.getElementById("demo");
-                output.innerHTML = slider.value;
+                output.innerHTML = "$"+slider.value;
                 slider.oninput = function() {
                     output.innerHTML = this.value;
                 }
             </script>
-            
-          <div class="expense">
-          <label class="savings">First Month's Rent:</label>
-          &nbsp$&nbsp
-          <number id="first_month">0</number></div>
           
-               <div class="expense">
-          <label class="savings">Last Month's Rent:</label>
-          &nbsp$&nbsp
-          <number id="last_month">0</number></div>
-      <div class="expense">
-          <label class="savings">One Month Emergency Fund:</label>
-          &nbsp$&nbsp
-          <number id="emergency">0</number></div>
-     <div class="expense">
-          <label class="savings">Moving:</label>
-          &nbsp$&nbsp
-          <number id="moving">0</number></div>
-      <div class="expense">
-          <label class="savings">Furniture:</label>
-          &nbsp$&nbsp
-          <number id="furniture">0</number></div>
-      <div class="expense">
-          <label class="savings">Grocery:</label>
-          &nbsp$&nbsp
-          <number id="grocery">0</number></div>
-      <div class="expense">
-          <label class="savings">Extra:</label>
-          &nbsp$&nbsp
-          <number id="extra">0</number></div>
-          </div>
-          
-         
-         
+<table class="center">
+ 
 
-  </div>
+  <tr>
+    <td width=300px >First Month's Rent:</td>
+    <td width=1px >$</td> 
+    <td width=1px  id="first_month" style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td>Last Month's Rent:</td>
+    <td>$</td> 
+    <td id="last_month" style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td>One Month Emergency Fund:</td>
+    <td>$</td> 
+    <td id="emergency" style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td>Moving:</td>
+    <td>$</td> 
+    <td id="moving" style="text-align:right">0</td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td>Furniture:</td>
+    <td>$</td> 
+    <td id="furniture"style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td>Grocery:</td>
+    <td>$</td> 
+    <td id="grocery" style="text-align:right">0</td>
+  </tr>
+  <tr>
+    <td>Extra:</td>
+    <td>$</td> 
+    <td id="extra" style="text-align:right">0</td>
+  </tr>
+</table>
+          
+          
+   </div>  </div>
+  
+  
 
 <script>
     
@@ -407,6 +446,7 @@ button {
     var grocery = 150.00;
     var furniture = 1000.00;
     var extra = 150.00; 
+   
 
     function updates() {
         updateExpenses();
@@ -416,11 +456,10 @@ button {
         updateBudget();
                
         updateRent();
-         
         updateSavingsNeededToMove();
 
         changeChart();
-        
+         
     }
     
     function updateRent(){
@@ -519,8 +558,7 @@ button {
             var amount = document.getElementById("demo");
 
             if (monthlyRent > 0) { 
-               
-               document.getElementById("test").innerHTML = "Good";
+  
                 if (monthlySavings > 0) {
                 var text1 = document.createTextNode("You'll need to save $");
                 var savingsNeeded = document.createTextNode(String(totalSavingsNeeded)); 
@@ -535,18 +573,21 @@ button {
                  savingsOverview.appendChild(text3);
                  
                         
-                          
      
              
     document.getElementById("first_month").innerHTML = parseFloat(monthlyRent).toFixed(2);
     document.getElementById("last_month").innerHTML =  parseFloat(monthlyRent).toFixed(2);
                     document.getElementById("emergency").innerHTML =  parseFloat(expensesAndRent).toFixed(2); 
                     document.getElementById("moving").innerHTML = parseFloat(moving).toFixed(2);
+                                            
+
                     document.getElementById("furniture").innerHTML = parseFloat(furniture).toFixed(2);
-                    document.getElementById("grocery").innerHTML = parseFloat(grocery).toFixed(2);
+                                        document.getElementById("grocery").innerHTML = parseFloat(grocery).toFixed(2);
                     document.getElementById("extra").innerHTML = adjustedExtra;
 
+                                
                     updateSlider(slider, amount);
+
                 }
         
                 else if (monthlySavings == 0){
@@ -572,13 +613,21 @@ button {
             }}
 
     function updateSlider(slider, amount){
+    		slider.disabled="false";
             slider.value = totalSavingsNeeded;
-            amount.innerHTML = totalSavingsNeeded;
+            amount.innerHTML = "$" + totalSavingsNeeded;
+            amount.setAttribute("style", 
+                    "font-weight:bold");
+            slider.disabled="true";
+        
+
         }
     
     function notValidInputs(slider, amount,savingsBreakdown){
+    		slider.disabled="false";
             slider.value = 0;
-            amount.innerHTML = 0;  
+            amount.innerHTML = "$0"; 
+            slider.disabled="true";
             document.getElementById("first_month").innerHTML = "0";
     document.getElementById("last_month").innerHTML =  "0";
                     document.getElementById("emergency").innerHTML =  "0";
