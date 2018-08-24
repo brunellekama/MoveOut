@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+
+<style> 
+body {font-family:Lato; font-size: 18px} 
+</style>
+
+<style> 
+input { 
+	font-size: 18px; 
+    font-family:Lato;
+    padding: 4px 4px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #CFA29D;
+    color: white;
+    border-radius: 5px;
+    text-align:right;
+} 
+</style>
+
+<style> 
+button {
+	font-size: 18px; 
+    font-family:Lato;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #CFA29D;
+} 
+</style>
+
+<style>
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #B46E66;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    height: 700px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 45%;
+}
+
+.right {
+  width: 55%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;}
+    
+    div.expense{
+    text-align: center}
+    
+    label.expense {
+  display: inline-block;
+	width:115px;	
+  text-align: right;}
+   label.budget {
+  display: inline-block;
+	width:150px;	
+  text-align: left;
+}
+   label.savings {
+  display: inline-block;
+	width:226px;	
+  text-align: left;
+}
+    
+</style>
+</head>
+<body>
+
+<h2>Two Unequal Columns</h2>
+
+<div class="row">
+  <div class="column left" style="background-color:#D5D8DC;">
+  
+<div style="text-align:center"> 
+            <h1>Budget</h1>
+            Monthly Net Income <br> 
+            $ <input type="number" 
+                id="netIncome" 
+                value=0  
+                min=0.00
+                max=99999.99
+                step=0.01
+                onchange="updates()"><br><br>
+            Expenses <br> <br> 
+        </div>
+
+<div class="expense">
+    <label class="expense">Student Loans:</label>
+    &nbsp$&nbsp<input  id="amount_loans" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Credit Card:</label>
+        &nbsp$&nbsp<input  id="amount_cc" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Food:</label>
+    &nbsp$&nbsp<input  id="amount_food" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Cell Phone:</label>
+    &nbsp$&nbsp<input  id="amount_phone" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Transportation:</label>
+    &nbsp$&nbsp<input  id="amount_transpo" 
+            type="number" 
+            value=0 
+            min=0.00
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Clothing:</label>
+    &nbsp$&nbsp<input  id="amount_clothes" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Entertainment:</label>
+    &nbsp$&nbsp<input  id="amount_entertain" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Cell Phone:</label>
+    &nbsp$&nbsp<input  id="amount_phone" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Personal Care:</label>
+    &nbsp$&nbsp<input  id="amount_personal" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Health Care:</label>
+    &nbsp$&nbsp<input  id="amount_health" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+<div class="expense">
+    <label class="expense">Other:</label>
+    &nbsp$&nbsp<input  id="amount_other" 
+            type="number" 
+            value=0 
+            min=0.00 
+            max=99999.99 
+            step=0.01
+            onchange="updates()" />
+</div>
+         
+  </div>
+  <div class="column right" style="background-color:#E5E7E9;">
+  
+  <div style="text-align:center">
+            <h1>Plan</h1>
+            Rent Budget <br> $ 
+            <input 
+                type="number" 
+                id="rent"  
+                value=0 
+                min=0.00 
+                max=99999.99
+                step=0.01
+                onchange="updates()"><br><br></div>
+ 
+      <div class="expense">
+          <label class="budget">Monthly Expenses:</label>
+          &nbsp$&nbsp
+          <number id="expenses">0</number></div>
+     <div class="expense">
+          <label class="budget">Monthly Savings:</label>
+          &nbsp$&nbsp
+          <number id="balance">0</number></div>
+          
+          <br>
+          
+          <div align=center id="chart"></div>
+
+            <script src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+        
+                var changeChart;
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    // Draw chart and set values
+                    var data = google.visualization.arrayToDataTable([
+                        ["Budget", "Expenses",{ role: "annotation" }, { role: "style" } , "Savings", { role: "annotation" }, { role: "style" }],
+                        ["Budget", 0,"", "EC7063", 0,"", "#58D68D"]
+                    ]);
+            
+                    var view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1, 
+                    					2,
+                                     3, 4, 5, 6]);
+            
+                    var options = {
+                        width: "100%",
+                        height: 100,
+                        vAxis: { textPosition: 'none' },
+                        hAxis: { textPosition: 'none' },
+                        bar: {groupWidth: "100%"},
+                        legend: { position: "none" },
+                        isStacked: "percent",
+                        backgroundColor:"#E5E7E9",
+                        is3D:true,
+                        annotations: {
+                            textStyle: {
+                                fontName: 'Lato:400',
+                                fontSize: 18,
+                                bold: true,
+                                color: 'white',
+                            }
+                        }
+                    };
+        
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = 
+                    new google.visualization.BarChart(document.getElementById('chart'));
+                chart.draw(view, options);
+                changeChart = function() {
+                    // define new options
+                  data.setValue(0, 1, monthlyExpenses);
+                  
+                  var expenses = "$" + monthlyExpenses;
+                                    data.setValue(0, 2, expenses);
+                       var savings = "$" + monthlySavings;             
+                  data.setValue(0, 4, monthlySavings);
+                                    data.setValue(0, 5,savings);
+
+                  
+                    // call draw() with new options 
+                    chart.draw(view, options);
+                }
+            }
+            </script>
+            
+            <h3 align="center" id=savings></h3>  <!-- Amount to be saved -->
+
+            <div class="slidecontainer">
+                <input 
+                    type="range" 
+                    min="0" 
+                    max="15000" 
+                    value="0" 	
+                    class="slider" 
+                    id="myRange"
+                    disabled=true>
+                <p> Savings Needed: $<span id="demo"></span></p>
+            </div>
+
+            <script>
+                var slider = document.getElementById("myRange");
+                var output = document.getElementById("demo");
+                output.innerHTML = slider.value;
+                slider.oninput = function() {
+                    output.innerHTML = this.value;
+                }
+            </script>
+            
+          <div class="expense">
+          <label class="savings">First Month's Rent:</label>
+          &nbsp$&nbsp
+          <number id="first_month">0</number></div>
+          
+               <div class="expense">
+          <label class="savings">Last Month's Rent:</label>
+          &nbsp$&nbsp
+          <number id="last_month">0</number></div>
+      <div class="expense">
+          <label class="savings">One Month Emergency Fund:</label>
+          &nbsp$&nbsp
+          <number id="emergency">0</number></div>
+     <div class="expense">
+          <label class="savings">Moving:</label>
+          &nbsp$&nbsp
+          <number id="moving">0</number></div>
+      <div class="expense">
+          <label class="savings">Furniture:</label>
+          &nbsp$&nbsp
+          <number id="furniture">0</number></div>
+      <div class="expense">
+          <label class="savings">Grocery:</label>
+          &nbsp$&nbsp
+          <number id="grocery">0</number></div>
+      <div class="expense">
+          <label class="savings">Extra:</label>
+          &nbsp$&nbsp
+          <number id="extra">0</number></div>
+          </div>
+          
+         
+         
+
+  </div>
+
+<script>
+    
+    var monthlyExpenses;
+    var monthlySavings;
+    var totalSavingsNeeded;
+    var monthlyRent;
+
+    var moving = 200.00;
+    var grocery = 150.00;
+    var furniture = 1000.00;
+    var extra = 150.00; 
+
+    function updates() {
+        updateExpenses();
+
+        updateSavings();
+               
+        updateBudget();
+               
+        updateRent();
+         
+        updateSavingsNeededToMove();
+
+        changeChart();
+        
+    }
+    
+    function updateRent(){
+        monthlyRent = document.getElementById("rent").value;
+     
+    }
+
+	function updateExpenses (){
+		var allInputs = document.getElementsByTagName('INPUT');
+        var expenses = 0;
+        
+        // Sum up expenses
+		for (var i = 0; i < allInputs.length ; i++) {
+        	var input = allInputs[i];
+              if(input.type == "number" && (input.id != "netIncome" && 
+                    input.id != "rent")) {
+            	var amount;
+            	if (input.value == ""){ //if amount input is empty
+                	amount = 0;
+                    }
+            	else {
+                	amount = parseFloat(input.value);
+                }
+                expenses += amount;
+       		}
+        } 
+        expenses = expenses.toFixed(2);
+        monthlyExpenses = expenses;  
+    }
+    
+    function updateSavings() {
+    	var netIncome = document.getElementById("netIncome").value;
+
+        if (netIncome == "") {
+        	netIncome = 0;
+            }
+        else {
+        	netIncome = parseFloat(netIncome);
+            }
+
+      	var savings = netIncome - monthlyExpenses;
+        var savings = savings.toFixed(2);
+        monthlySavings = savings;
+
+    }
+
+    function updateBudget() {
+        document.getElementById("balance").innerHTML = monthlySavings;
+       	document.getElementById("expenses").innerHTML = monthlyExpenses;
+       
+       	if (monthlySavings < 0) {
+               document.getElementById("balance").setAttribute("style", 
+                    "color:red"); //"in the red"
+       	}
+       	else {
+               document.getElementById("balance").setAttribute("style", 
+                    "color:black");
+       	}
+    }
+    
+        function updateSavingsNeededToMove() {
+                
+                 var expensesAndRent = parseFloat(monthlyExpenses) + parseFloat(monthlyRent);
+                 
+                 
+                 var savingsNeeded = (monthlyRent * 2) + expensesAndRent +
+                      moving + grocery + furniture + extra;
+                      
+    
+                 var timeNeeded = savingsNeeded / monthlySavings;
+    
+                 timeNeeded = Math.ceil(timeNeeded);
+    
+                 var savingsNeededRounded = monthlySavings*timeNeeded;
+    
+                 var adjustedExtra = extra + (savingsNeededRounded - savingsNeeded); 
+                 adjustedExtra = adjustedExtra.toFixed(2);
+                 
+                 savingsNeeded  = savingsNeededRounded.toFixed(2);
+                  
+                 totalSavingsNeeded = savingsNeeded;
+                      
+
+                 updateMessages(expensesAndRent, timeNeeded, adjustedExtra)                 ;
+             
+        }
+        
+    function updateMessages(expensesAndRent, timeNeeded, adjustedExtra) {
+    
+    
+      
+            var savingsOverview = document.getElementById("savings");
+            
+            var savingsBreakdown = document.getElementById("savingsText");
+            var slider = document.getElementById("myRange");
+            var amount = document.getElementById("demo");
+
+            if (monthlyRent > 0) { 
+               
+               document.getElementById("test").innerHTML = "Good";
+                if (monthlySavings > 0) {
+                var text1 = document.createTextNode("You'll need to save $");
+                var savingsNeeded = document.createTextNode(String(totalSavingsNeeded)); 
+               
+                var text2 = document.createTextNode(" over the course of ");
+                var timeNeeded = document.createTextNode(String(timeNeeded));
+                var text3 = document.createTextNode(" month(s) to be able to move out.");
+           savingsOverview.innerHTML = "";      savingsOverview.appendChild(text1);
+                 savingsOverview.appendChild(savingsNeeded);
+                 savingsOverview.appendChild(text2);
+                 savingsOverview.appendChild(timeNeeded);
+                 savingsOverview.appendChild(text3);
+                 
+                        
+                          
+     
+             
+    document.getElementById("first_month").innerHTML = parseFloat(monthlyRent).toFixed(2);
+    document.getElementById("last_month").innerHTML =  parseFloat(monthlyRent).toFixed(2);
+                    document.getElementById("emergency").innerHTML =  parseFloat(expensesAndRent).toFixed(2); 
+                    document.getElementById("moving").innerHTML = parseFloat(moving).toFixed(2);
+                    document.getElementById("furniture").innerHTML = parseFloat(furniture).toFixed(2);
+                    document.getElementById("grocery").innerHTML = parseFloat(grocery).toFixed(2);
+                    document.getElementById("extra").innerHTML = adjustedExtra;
+
+                    updateSlider(slider, amount);
+                }
+        
+                else if (monthlySavings == 0){
+                    savingsOverview.innerHTML = 
+                    "You have no money allocated to savings. " +
+                    "You need to save in order to move out!" ; 
+                    notValidInputs(slider, amount,savingsBreakdown);
+                    } 
+                
+                else {
+                    savingsOverview.innerHTML = 
+                    "Your expenses are greater than your income. " +
+                    "Review your expenses!" ; 
+                    notValidInputs(slider, amount,savingsBreakdown);
+                    
+                    }
+              }
+            else {
+            
+                savingsOverview.innerHTML = 
+                "Please update your monthly rent budget"; 
+                notValidInputs(slider, amount,savingsBreakdown);
+            }}
+
+    function updateSlider(slider, amount){
+            slider.value = totalSavingsNeeded;
+            amount.innerHTML = totalSavingsNeeded;
+        }
+    
+    function notValidInputs(slider, amount,savingsBreakdown){
+            slider.value = 0;
+            amount.innerHTML = 0;  
+            document.getElementById("first_month").innerHTML = "0";
+    document.getElementById("last_month").innerHTML =  "0";
+                    document.getElementById("emergency").innerHTML =  "0";
+                    document.getElementById("moving").innerHTML = "0";
+                    document.getElementById("furniture").innerHTML = "0";
+                    document.getElementById("grocery").innerHTML = "0";
+                    document.getElementById("extra").innerHTML = "0";
+    }
+    
+</script>
+
+
+</body>
+</html>
