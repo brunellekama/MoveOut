@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+<style> body {font-family:Lato; font-size: 18px} </style>
+</head>
+
+<body>
+<!-- Styles to be used -->
+<style> input[type='text'] { font-size: 18px; font-family:Lato} </style>
+<style> input[type='number'] { font-size: 18px; font-family:Lato} </style>
+<style> button {font-size: 18px; font-family:Lato} </style>
+
+<h4 style="text-align:center" >Vous déménagez de chez vos parents pour la première fois? Utilisez cet outil simple pour budgétiser et voir combien de temps vous devez épargner pour être enfin autonome. Ce budget vous permet d’économiser un peu plus pour vous éviter de retourner chez maman et papa si les temps deviennent durs. </h4><br>
+
+<!-- How much you need to save and how long it will take-->
+<h2 id=savings></h2>
+<text id=savingsText></text>
+
+<!-- Specify monthly rent budget and net income. Any changes to amounts should update the amount being saved each month and required to move out -->
+Budget de location: 
+<input type="number" id="rent" value="0" onchange="updateBalance(); updateSavings()">
+$
+<br>
+Budget pour meubles:
+<input type="number" id="furniture" value="0"
+onchange="updateBalance(); updateSavings()">
+$
+<br><br>
+Salaire Net Mensuel:
+<input type="number" id="netIncome" value=0 onchange="updateBalance(); updateSavings()">
+$
+<br>
+Dépenses mensuelles:
+<number id="expenses">0</number>
+$
+<br>
+Épargne mensuelle:
+<number id="balance">0</number>
+$
+<br>
+
+<h3>Dépenses</h3> 
+<button onclick=addExpense()>Ajouter une dépense </button><br>
+
+<!--first line of inputs-->
+<p> Dépense: 
+<input id="expense_1" type="text">
+Montant:  
+<input id="amount_1" type="number" value="0" onchange="updateBalance(); updateSavings()"> $ </p>
+
+<script>
+
+	var id = 1; //global var used to set unique id for inputs generated on each iteration
+    
+    var moving = 200;
+    var grocery = 150;
+    var extra = 300;
+    
+    function showError() {
+        	var error = document.createElement("text");
+    		var errorMessage = document.createTextNode("Enter valid inputs for Expense and Amount.");
+           	error.setAttribute("id", "error");
+            error.setAttribute("style", "color:red");
+    		error.appendChild(errorMessage);
+    		document.body.appendChild(error);
+    	}
+        
+    function checkInputs () {
+    	var prevAmountElem = document.getElementById("amount_" + id);
+    	var prevAmountValue = prevAmountElem.value;
+    	var prevExpenseElem = document.getElementById("expense_" + id);
+    	var prevExpenseValue = prevExpenseElem.value; 
+        
+        invalidInput = (parseInt(prevAmountValue) <= 0 || prevAmountValue == "" || prevExpenseValue == "");
+        
+        return invalidInput;
+    }
+    
+    function addInputs() {
+    		id += 1; //increment for this iteration
+        
+    		//"Name:"
+    		var expense = document.createElement("p");
+    		var expenseTitle = document.createTextNode("Dépense: ");
+    		expense.appendChild(expenseTitle);
+    		document.body.appendChild(expense);
+    	
+        	//Name input
+			var expenseName = document.createElement("INPUT");
+    		expenseName.setAttribute("type", "text");
+        	expenseName.setAttribute("id", "expense_"+id);
+    		expense.appendChild(expenseName);
+    
+    		//"Amount:"
+    		var amount = document.createElement("text");
+    		var amountTitle = document.createTextNode(" Montant: ");
+    		amount.appendChild(amountTitle);
+    		expense.appendChild(amount);
+    
+    		// Amount input
+    		var expenseAmount = document.createElement("INPUT");
+    		expenseAmount.setAttribute("type", "number")
+        	expenseAmount.setAttribute("value", 0);
+        	expenseAmount.setAttribute("id", "amount_"+id);
+        		//updates to be done each time different value is entered
+          	expenseAmount.setAttribute("onchange","updateBalance(); updateSavings()"); 
+    		amount.appendChild(expenseAmount);
+            
+           	var dollar = document.createElement("text");
+    		var dollarSign = document.createTextNode(" $");
+    		dollar.appendChild(dollarSign);
+            amount.appendChild(dollar);
+        }     
+
+	function addExpense() {             
+  		error = document.getElementById('error');
+        var invalidInput = checkInputs();
+        if (invalidInput) {  
+        	if (!error)
+            	showError();  
+            }
+            
+        //Otherwise add new expense line
+        else {	
+        	if (error) {
+            	error.parentNode.removeChild(error); //if already error message, remove it
+                }
+            addInputs();
+    	} 
+    }  
+
+	function getExpenses (){
+		var allExpenses = document.getElementsByTagName('INPUT');
+        var totalExpenses = 0;
+        
+        // Sum up expenses
+		for (var i = 0; i < allExpenses.length ; i++) {
+        	var expense = allExpenses[i];
+  			if(expense.type == "number" && (expense.id != "netIncome" && expense.id != "rent" && expense.id != "furniture")) {
+            	var value;
+            	if (expense.value == ""){ //if amount input is empty
+                	value = 0;
+                    }
+            	else {
+                	value = parseInt(expense.value);
+                }
+                totalExpenses += value;
+       		}
+    	}     
+        return totalExpenses;
+    }
+    
+    function updateBalance() {
+    	var netIncome = document.getElementById("netIncome").value;
+	   	var totalExpenses = getExpenses();
+        if (netIncome == "") {
+        	netIncome = 0;
+            }
+        else {
+        	netIncome = parseInt(netIncome);
+            }
+      	var balance = netIncome - totalExpenses;
+       	document.getElementById("balance").innerHTML = balance;
+       	document.getElementById("expenses").innerHTML = totalExpenses;
+       
+       	if (balance < 0) {
+       		document.getElementById("balance").setAttribute("style", "color:red"); //"in the red"
+       	}
+       	else {
+       		document.getElementById("balance").setAttribute("style", "color:black");
+       	}
+    }
+    
+    function updateSavings() {
+    	var monthlySavings = parseInt(document.getElementById("balance").innerHTML);
+        var monthlyRent = parseInt(document.getElementById("rent").value);
+        var monthlyExpenses = getExpenses();
+        var furnitureBudget = parseInt(document.getElementById("furniture").value);
+        
+        var expensesAndRent = monthlyRent+monthlyExpenses;
+        var savingsNeeded = (monthlyRent * 2) + (expensesAndRent * 3) + furnitureBudget + moving + grocery + extra;
+        var timeNeeded = savingsNeeded / monthlySavings;
+        timeNeeded = Math.ceil(timeNeeded);
+        var totalSavings = monthlySavings*timeNeeded;
+        var newExtra = extra + (totalSavings - savingsNeeded); 
+        updateMessage(monthlySavings, monthlyRent, expensesAndRent, totalSavings, timeNeeded, furnitureBudget, newExtra);
+    }
+    
+    
+    function updateMessage(monthlySavings, monthlyRent, expensesAndRent, totalSavings, timeNeeded, furnitureBudget, newExtra) {
+    
+    	if (document.getElementById("rent").value > 0) { 
+            
+        	if (monthlySavings > 0) {
+        		document.getElementById("savings").innerHTML = 
+            	"Vous devrez économiser " + totalSavings + "$ au cours de " + timeNeeded + " mois pour pouvoir déménager";
+                document.getElementById("savingsText").innerHTML =
+                "Location du premier mois: " + monthlyRent + "$" +
+                "<br/> Location du dernier mois/Dépôt de sécurité: " + monthlyRent + "$" +
+                "<br/> Fonds d'urgence de 3 mois (Location + Dépenses): " + (expensesAndRent *3) + "$" +
+                "<br/> Meubles: " + furnitureBudget + "$" +
+                "<br/> Courses d'épiceries: " + grocery + "$" +
+                "<br/> Déménagement: " + moving + "$" +
+                "<br/> Surplus: " + newExtra + "$<br/><br/>";
+            	}
+        	else if (monthlySavings == 0){
+        		document.getElementById("savings").innerHTML = 
+            	"Vous n'avez pas d'argent alloué à l'épargne. Vous devez épargner pour déménager!" ; 
+                document.getElementById("savingsText").innerHTML = "";
+            	} 
+            
+        	else {
+            	document.getElementById("savings").innerHTML = 
+            	"Vos dépenses sont supérieures à vos revenus. Révisez vos dépenses!" ; 
+                document.getElementById("savingsText").innerHTML = "";
+        		}
+      	}
+        else {
+             document.getElementById("savings").innerHTML = 
+            "Veuillez mettre à jour votre budget de location mensuel"; 
+            document.getElementById("savingsText").innerHTML = "";
+        }
+	}
+    
+   
+</script>
+
+</body>
+</html>
