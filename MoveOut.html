@@ -30,6 +30,7 @@ button {
     background-color: #FFFFFF;
     border-radius: 5px;
     color: #CFA29D;
+    font-weight: bold;
 } 
 </style>
 
@@ -433,8 +434,9 @@ text-align: right;}
           
    </div>  </div>
   
+  <br>
+  <div style="text-align:center"><button align="center" onclick=clearAll() > Clear </button></div>
   
-
 <script>
     
     var monthlyExpenses;
@@ -462,6 +464,19 @@ text-align: right;}
          
     }
     
+    function clearAll() {
+    	var allInputs = document.getElementsByTagName('INPUT');
+        var expenses = 0;
+        
+        // Sum up expenses
+		for (var i = 0; i < allInputs.length ; i++) {
+        	var input = allInputs[i];
+              input.value=0;
+        } 
+    	updates();
+        document.getElementById("savings").innerHTML="";
+        
+    }
     function updateRent(){
         monthlyRent = document.getElementById("rent").value;
      
