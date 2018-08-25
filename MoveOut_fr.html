@@ -111,7 +111,7 @@ border-radius: 5px;
   /* Smartphone Portrait and Landscape */ 
 @media screen and (max-width: 480px){ 
       .mobileShow {display: inline;}
-      .desktopShow {display: inline;}
+      .desktopShow {display: none;}
       .column {
         width: 100%;
         height: auto;}
@@ -153,7 +153,7 @@ text-align:left;
 </head>
 <body>
 
-<div class="desktopShow"><h3 id=savings></h3><div>
+<div class="desktopShow"><h3 id=savings></h3></div>
 
 <div class="row">
   <div class="column left" style="background-color:#D5D8DC;">
@@ -393,7 +393,7 @@ text-align:left;
             <text style="text-align:left ">$0</text>
             <text style="float:right; clear:both ">$10000</text>
             
-          <h4 id=savingsMobile></h4>   
+          <div class="mobileShow"><h4 id=savingsMobile></h4>   </div>
             
             <p><label style="display:block;text-align:center">
 Économies nécessaires:</label> 
@@ -593,7 +593,7 @@ text-align:left;
     
       
             var savingsOverview = document.getElementById("savings");
-            var savingsOverviewMobileHTML = document.getElementById("savingsMobile").innerHTML;
+            var savingsOverviewMobile = document.getElementById("savingsMobile");
             
             var savingsBreakdown = document.getElementById("savingsText");
             var slider = document.getElementById("myRange");
@@ -613,8 +613,7 @@ text-align:left;
                  savingsOverview.appendChild(text2);
                  savingsOverview.appendChild(timeNeeded);
                  savingsOverview.appendChild(text3);
-                 savingsOverviewMobileHTML = savingsOverview.innerHTML;
-                 
+savingsOverviewMobile.innerHTML = savingsOverview.innerHTML;                 
                         
      
              
@@ -636,16 +635,14 @@ text-align:left;
                 else if (monthlySavings == 0){
                     savingsOverview.innerHTML = 
                     "Vous n'avez pas d'argent alloué à l'épargne. Vous devez épargner pour déménager!"; 
-                                     savingsOverviewMobileHTML = savingsOverview.innerHTML;
-
+savingsOverviewMobile.innerHTML = savingsOverview.innerHTML;
                     notValidInputs(slider, amount,savingsBreakdown);
                     } 
                 
                 else {
                     savingsOverview.innerHTML = 
                     "Vos dépenses sont supérieures à vos revenus. Révisez vos dépenses!" ; 
-                     savingsOverviewMobileHTML = savingsOverview.innerHTML;
-
+savingsOverviewMobile.innerHTML = savingsOverview.innerHTML;
                     notValidInputs(slider, amount,savingsBreakdown);
                     
                     }
@@ -654,8 +651,7 @@ text-align:left;
             
                 savingsOverview.innerHTML = 
                 "Veuillez mettre à jour votre budget de location mensuel"; 
-                                 savingsOverviewMobileHTML = savingsOverview.innerHTML;
-
+savingsOverviewMobile.innerHTML = savingsOverview.innerHTML;
                 notValidInputs(slider, amount,savingsBreakdown);
             }}
 
